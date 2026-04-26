@@ -291,7 +291,7 @@
                 {#if card && card.type === "mod"}
                   {@const mod = card as ModCardDef}
                   <span>{traitEmoji(mod.trait)}</span>
-                  <span class="text-[9px] text-center leading-tight truncate w-full text-center"
+                  <span class="text-[9px] text-center leading-tight truncate w-full"
                     >{mod.name}</span
                   >
                   <span class="text-[8px] opacity-50">[{mod.trait}]</span>
