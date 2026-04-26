@@ -4,6 +4,7 @@
   // Import Apps
   import BrowserApp from "../apps/BrowserApp.svelte";
   import HelloApp from "../apps/HelloApp.svelte";
+  import SubredditWarsApp from "../apps/SubredditWarsApp.svelte";
   import { os } from "../os.svelte";
   import CommandCenter from "./CommandCenter.svelte";
   import DesktopIcon from "./DesktopIcon.svelte";
@@ -29,6 +30,14 @@
         component: BrowserApp,
         defaultWidth: 800,
         defaultHeight: 600,
+      });
+      os.registerApp({
+        id: "subreddit-wars",
+        title: "Subreddit Wars",
+        icon: "⚔️",
+        component: SubredditWarsApp,
+        defaultWidth: 520,
+        defaultHeight: 700,
       });
     }
 
