@@ -8,7 +8,6 @@ export const judyHoppsOptimisticOfficer: CharacterCard = {
           {
             chooser: "CONTROLLER",
             effect: {
-              type: "banish",
               target: {
                 selector: "chosen",
                 count: 1,
@@ -16,6 +15,7 @@ export const judyHoppsOptimisticOfficer: CharacterCard = {
                 zones: ["play"],
                 cardTypes: ["item"],
               },
+              type: "banish",
             },
             type: "optional",
           },

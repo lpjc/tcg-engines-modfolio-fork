@@ -17,7 +17,6 @@ export const wreckitRalphBigLug: CharacterCard = {
           {
             chooser: "CONTROLLER",
             effect: {
-              type: "return-to-hand",
               target: {
                 selector: "chosen",
                 count: 1,
@@ -25,6 +24,7 @@ export const wreckitRalphBigLug: CharacterCard = {
                 zones: ["play"],
                 cardTypes: ["character"],
               },
+              type: "return-to-hand",
             },
             type: "optional",
           },

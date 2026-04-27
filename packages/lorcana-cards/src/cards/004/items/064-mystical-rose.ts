@@ -13,20 +13,19 @@ export const mysticalRose: ItemCard = {
             modifier: 0,
             stat: "lore",
             target: {
-              selector: "chosen",
               count: 1,
               filter: [{ type: "has-name", name: "Beast" }],
+              selector: "chosen",
             },
             type: "modify-stat",
           },
           {
             condition: {
-              type: "has-named-character",
-              name: "Belle",
               controller: "you",
+              name: "Belle",
+              type: "has-named-character",
             },
             then: {
-              type: "move-damage",
               amount: 0,
               from: {
                 selector: "chosen",
@@ -37,6 +36,7 @@ export const mysticalRose: ItemCard = {
                 count: 1,
                 filter: [{ type: "owner", owner: "opponent" }],
               },
+              type: "move-damage",
             },
             type: "conditional",
           },

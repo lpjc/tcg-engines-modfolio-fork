@@ -56,19 +56,19 @@ export const userSubscriptions = pgTable(
  * Stores user preferences for content digest emails.
  */
 export const digestPreferences = pgTable("digest_preferences", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  userId: text("user_id")
-    .references(() => users.id, { onDelete: "cascade" })
-    .notNull()
-    .unique(),
-  frequency: digestFrequencyEnum("frequency").notNull().default("daily"),
-  deliveryTime: time("delivery_time").notNull().default("09:00:00"),
-  isActive: boolean("is_active").notNull().default(true),
   createdAt: timestamp("created_at").defaultNow().notNull(),
+  deliveryTime: time("delivery_time").notNull().default("09:00:00"),
+  frequency: digestFrequencyEnum("frequency").notNull().default("daily"),
+  id: uuid("id").primaryKey().defaultRandom(),
+  isActive: boolean("is_active").notNull().default(true),
   updatedAt: timestamp("updated_at")
     .defaultNow()
     .$onUpdate(() => new Date())
     .notNull(),
+  userId: text("user_id")
+    .references(() => users.id, { onDelete: "cascade" })
+    .notNull()
+    .unique(),
 });
 
 /**

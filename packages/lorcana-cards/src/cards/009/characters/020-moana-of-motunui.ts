@@ -8,7 +8,6 @@ export const moanaOfMotunui: CharacterCard = {
           {
             chooser: "CONTROLLER",
             effect: {
-              type: "ready",
               target: {
                 selector: "chosen",
                 count: 1,
@@ -16,6 +15,7 @@ export const moanaOfMotunui: CharacterCard = {
                 zones: ["play"],
                 cardTypes: ["character"],
               },
+              type: "ready",
             },
             type: "optional",
           },

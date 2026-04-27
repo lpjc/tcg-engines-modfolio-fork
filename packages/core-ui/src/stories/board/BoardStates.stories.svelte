@@ -42,6 +42,16 @@
       "Shuffling decks...",
       "Drawing starting hands...",
     ],
+    riftbound: [
+      "Player 1 is starting the game!",
+      "Shuffling decks...",
+      "Drawing starting hands...",
+      "Turn 1 begins!",
+      "Player 1's Action Phase begins",
+      "Player 1 hides a card at Battlefield A",
+      "Player 2 hides a card at Battlefield A",
+      "Both players have committed — waiting for reveal",
+    ],
     runeblood: [
       "Setting player 1 to VisceraI, Rune Blood",
       "Setting player 2 to VisceraI, Rune Blood",
@@ -66,6 +76,8 @@
   };
 
   const makeCounterText = (n: number | string) => String(n);
+
+  let isRevealed = $state(false);
 </script>
 
 <Story name="Lorcana-Style Mulligan">
@@ -1017,6 +1029,238 @@
                 </div>
               </Card>
             </div>
+          </div>
+        </div>
+      </div>
+    </BoardSurface>
+  </BoardViewport>
+</Story>
+
+<Story name="Riftbound Hidden Card — Commit and Reveal">
+  <BoardViewport background="#1a1a2e" data-theme="dark">
+    <UIChrome position="top-left">
+      <div
+        class="bg-black/80 text-white text-[11px] leading-4 p-3 w-[320px] h-[190px] shadow-lg"
+      >
+        <ul class="list-disc pl-4 space-y-0.5">
+          {#each logBlocks.riftbound as line}
+            <li class="opacity-90">{line}</li>
+          {/each}
+        </ul>
+      </div>
+    </UIChrome>
+
+    <UIChrome position="top-center" zIndex={60}>
+      <div
+        class="bg-indigo-900/90 border border-indigo-400/30 text-white rounded-xl px-5 py-2 shadow-xl text-xs font-semibold tracking-wide"
+      >
+        Action Phase — Showdown Open
+      </div>
+    </UIChrome>
+
+    <UIChrome position="bottom-center" zIndex={60}>
+      <div
+        class="bg-black/85 text-white rounded-full px-5 py-2 shadow-xl flex items-center gap-3 text-xs"
+      >
+        {#if isRevealed}
+          <span class="opacity-95 text-green-400">Both hidden cards revealed!</span>
+        {:else}
+          <span class="opacity-95">Both players have committed a hidden card</span>
+          <button
+            class="btn btn-primary btn-xs"
+            onclick={() => (isRevealed = true)}
+          >
+            Commit and Reveal
+          </button>
+        {/if}
+      </div>
+    </UIChrome>
+
+    <BoardSurface aspectRatio="16/9" class="bg-indigo-950/20">
+      <div class="w-full h-full p-6 grid grid-rows-2 gap-6">
+        <!-- Opponent side -->
+        <div
+          class="relative rounded-2xl overflow-hidden border border-white/10"
+        >
+          <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_60%_40%,rgba(99,102,241,0.2),rgba(10,10,30,0.95))]"
+          ></div>
+          <div class="relative h-full grid grid-cols-[120px_1fr_130px] gap-4 p-5">
+            <div
+              class="rounded-xl bg-white/5 border border-white/10 flex flex-col items-center justify-center gap-2"
+            >
+              <div class="text-white/35 text-sm">Base</div>
+              <div
+                class="w-10 h-10 bg-black/60 border border-white/15 rounded flex items-center justify-center text-white font-semibold"
+              >
+                HP
+              </div>
+            </div>
+
+            <div class="grid grid-rows-2 gap-3">
+              <div
+                class="rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/35 text-sm"
+              >
+                Battlefield A
+              </div>
+              <div
+                class="rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/35 text-sm"
+              >
+                Resource Area
+              </div>
+            </div>
+
+            <div class="grid grid-rows-[auto_1fr] gap-3">
+              <div
+                class="rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/35 text-sm"
+              >
+                Trash
+              </div>
+              <div class="flex justify-end items-start">
+                <div class="relative w-24">
+                  <Card faceDown hoverable={false} draggable={false}>
+                    {#snippet cardBack()}
+                      <div
+                        class="w-full h-full bg-gradient-to-br from-indigo-950 to-slate-800 flex items-center justify-center"
+                      >
+                        <div class="w-10 h-10 border border-indigo-400/30 rotate-45"></div>
+                      </div>
+                    {/snippet}
+                  </Card>
+                  <div
+                    class="absolute top-2 right-2 w-10 h-10 rounded-full bg-black/80 border border-white/20 flex items-center justify-center text-white font-semibold text-sm"
+                  >
+                    {makeCounterText(32)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Opponent's committed (hidden) card in Facedown Zone -->
+          <div class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
+            <div class="w-24 h-32">
+              <Card
+                faceDown={!isRevealed}
+                hoverable={false}
+                draggable={false}
+              >
+                {#snippet cardBack()}
+                  <div
+                    class="w-full h-full bg-gradient-to-br from-indigo-800 to-slate-900 flex items-center justify-center border-2 border-dashed border-indigo-400/40"
+                  >
+                    <div class="text-indigo-300/60 text-[10px] tracking-widest text-center font-semibold">
+                      HIDDEN
+                    </div>
+                  </div>
+                {/snippet}
+                <div
+                  class="w-full h-full bg-gradient-to-br from-red-700 to-red-950 flex flex-col justify-between p-2 text-white"
+                >
+                  <div class="text-[10px] font-bold">Aggro Assault</div>
+                  <div class="text-[9px] opacity-70">Action — Fury</div>
+                  <div class="text-[9px] self-end font-semibold">ATK +3</div>
+                </div>
+              </Card>
+            </div>
+            {#if !isRevealed}
+              <div class="text-center mt-1 text-indigo-300/60 text-[10px] tracking-widest">
+                COMMITTED
+              </div>
+            {/if}
+          </div>
+        </div>
+
+        <!-- Player side -->
+        <div
+          class="relative rounded-2xl overflow-hidden border border-white/10"
+        >
+          <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_40%_60%,rgba(99,102,241,0.2),rgba(10,10,30,0.95))]"
+          ></div>
+          <div class="relative h-full grid grid-cols-[120px_1fr_130px] gap-4 p-5">
+            <div
+              class="rounded-xl bg-white/5 border border-white/10 flex flex-col items-center justify-center gap-2"
+            >
+              <div class="text-white/35 text-sm">Base</div>
+              <div
+                class="w-10 h-10 bg-black/60 border border-white/15 rounded flex items-center justify-center text-white font-semibold"
+              >
+                HP
+              </div>
+            </div>
+
+            <div class="grid grid-rows-2 gap-3">
+              <div
+                class="rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/35 text-sm"
+              >
+                Resource Area
+              </div>
+              <div
+                class="rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/35 text-sm"
+              >
+                Battlefield A
+              </div>
+            </div>
+
+            <div class="grid grid-rows-[auto_1fr] gap-3">
+              <div
+                class="rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/35 text-sm"
+              >
+                Trash
+              </div>
+              <div class="flex justify-end items-end">
+                <div class="relative w-24">
+                  <Card faceDown hoverable={false} draggable={false}>
+                    {#snippet cardBack()}
+                      <div
+                        class="w-full h-full bg-gradient-to-br from-indigo-950 to-slate-800 flex items-center justify-center"
+                      >
+                        <div class="w-10 h-10 border border-indigo-400/30 rotate-45"></div>
+                      </div>
+                    {/snippet}
+                  </Card>
+                  <div
+                    class="absolute top-2 right-2 w-10 h-10 rounded-full bg-black/80 border border-white/20 flex items-center justify-center text-white font-semibold text-sm"
+                  >
+                    {makeCounterText(28)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Player's committed (hidden) card in Facedown Zone -->
+          <div class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
+            <div class="w-24 h-32">
+              <Card
+                faceDown={!isRevealed}
+                hoverable={false}
+                draggable={false}
+              >
+                {#snippet cardBack()}
+                  <div
+                    class="w-full h-full bg-gradient-to-br from-indigo-800 to-slate-900 flex items-center justify-center border-2 border-dashed border-indigo-400/40"
+                  >
+                    <div class="text-indigo-300/60 text-[10px] tracking-widest text-center font-semibold">
+                      HIDDEN
+                    </div>
+                  </div>
+                {/snippet}
+                <div
+                  class="w-full h-full bg-gradient-to-br from-cyan-700 to-cyan-950 flex flex-col justify-between p-2 text-white"
+                >
+                  <div class="text-[10px] font-bold">Shield Barrier</div>
+                  <div class="text-[9px] opacity-70">Reaction — Calm</div>
+                  <div class="text-[9px] self-end font-semibold">DEF +2</div>
+                </div>
+              </Card>
+            </div>
+            {#if !isRevealed}
+              <div class="text-center mt-1 text-indigo-300/60 text-[10px] tracking-widest">
+                COMMITTED
+              </div>
+            {/if}
           </div>
         </div>
       </div>

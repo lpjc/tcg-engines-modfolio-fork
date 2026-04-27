@@ -175,10 +175,6 @@ describe("HistoryManager", () => {
         messages: {
           messages: {
             [PLAYER_ONE]: {
-              casual: {
-                key: "mulligan.self",
-                values: { cards: cardsDrawn, count: 3 },
-              },
               advanced: {
                 key: "mulligan.self.detailed",
                 values: {
@@ -186,15 +182,19 @@ describe("HistoryManager", () => {
                   cards: cardsDrawn,
                 },
               },
+              casual: {
+                key: "mulligan.self",
+                values: { cards: cardsDrawn, count: 3 },
+              },
             },
             [PLAYER_TWO]: {
-              casual: {
-                key: "mulligan.opponent",
-                values: { count: 3 },
-              },
               advanced: {
                 key: "mulligan.opponent.detailed",
                 values: { count: 3, playerId: PLAYER_ONE },
+              },
+              casual: {
+                key: "mulligan.opponent",
+                values: { count: 3 },
               },
             },
           },
@@ -235,10 +235,6 @@ describe("HistoryManager", () => {
       manager.addEntry({
         messages: {
           messages: {
-            casual: {
-              key: "draw.casual",
-              values: { player: "One", count: 5 },
-            },
             advanced: {
               key: "draw.advanced",
               values: {
@@ -246,6 +242,10 @@ describe("HistoryManager", () => {
                 count: 5,
                 cardIds: ["c1", "c2", "c3", "c4", "c5"],
               },
+            },
+            casual: {
+              key: "draw.casual",
+              values: { player: "One", count: 5 },
             },
             developer: {
               key: "draw.developer",
@@ -408,16 +408,16 @@ describe("HistoryManager", () => {
         },
         messages: {
           messages: {
-            casual: {
-              key: "move.failed",
-              values: { reason: "Invalid target" },
-            },
             advanced: {
               key: "move.failed.technical",
               values: {
                 errorCode: "INVALID_TARGET",
                 targetId: "card-123",
               },
+            },
+            casual: {
+              key: "move.failed",
+              values: { reason: "Invalid target" },
             },
           },
           visibility: "PUBLIC",

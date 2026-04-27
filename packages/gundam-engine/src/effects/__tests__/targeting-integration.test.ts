@@ -33,8 +33,8 @@ function createGameState(
       cardDamage: {} as Record<CardId, number>,
       cardPositions: (config.cardPositions ?? {}) as Record<CardId, "active" | "rested">,
       effectStack: {
-        stack: [],
         nextInstanceId: 0,
+        stack: [],
       },
       hasPlayedResourceThisTurn: {
         [player1]: true,
@@ -51,6 +51,7 @@ function createGameState(
     zones: {
       baseSection: {
         [player1]: {
+          cards: [] as CardId[],
           config: {
             id: "base-p1",
             name: "Base Section",
@@ -59,9 +60,9 @@ function createGameState(
             owner: player1,
             maxSize: 1,
           },
-          cards: [] as CardId[],
         },
         [player2]: {
+          cards: [] as CardId[],
           config: {
             id: "base-p2",
             name: "Base Section",
@@ -70,11 +71,11 @@ function createGameState(
             owner: player2,
             maxSize: 1,
           },
-          cards: [] as CardId[],
         },
       } as any,
       battleArea: {
         [player1]: {
+          cards: (config.player1Cards?.battleArea ?? []) as CardId[],
           config: {
             id: "ba-p1",
             name: "Battle Area",
@@ -83,9 +84,9 @@ function createGameState(
             owner: player1,
             maxSize: 6,
           },
-          cards: (config.player1Cards?.battleArea ?? []) as CardId[],
         },
         [player2]: {
+          cards: (config.player2Cards?.battleArea ?? []) as CardId[],
           config: {
             id: "ba-p2",
             name: "Battle Area",
@@ -94,11 +95,11 @@ function createGameState(
             owner: player2,
             maxSize: 6,
           },
-          cards: (config.player2Cards?.battleArea ?? []) as CardId[],
         },
       } as any,
       deck: {
         [player1]: {
+          cards: (config.player1Cards?.deck ?? []) as CardId[],
           config: {
             id: "deck-p1",
             name: "Deck",
@@ -108,9 +109,9 @@ function createGameState(
             faceDown: true,
             maxSize: 50,
           },
-          cards: (config.player1Cards?.deck ?? []) as CardId[],
         },
         [player2]: {
+          cards: (config.player2Cards?.deck ?? []) as CardId[],
           config: {
             id: "deck-p2",
             name: "Deck",
@@ -120,11 +121,11 @@ function createGameState(
             faceDown: true,
             maxSize: 50,
           },
-          cards: (config.player2Cards?.deck ?? []) as CardId[],
         },
       } as any,
       hand: {
         [player1]: {
+          cards: (config.player1Cards?.hand ?? []) as CardId[],
           config: {
             id: "hand-p1",
             name: "Hand",
@@ -133,9 +134,9 @@ function createGameState(
             owner: player1,
             maxSize: 10,
           },
-          cards: (config.player1Cards?.hand ?? []) as CardId[],
         },
         [player2]: {
+          cards: (config.player2Cards?.hand ?? []) as CardId[],
           config: {
             id: "hand-p2",
             name: "Hand",
@@ -144,11 +145,11 @@ function createGameState(
             owner: player2,
             maxSize: 10,
           },
-          cards: (config.player2Cards?.hand ?? []) as CardId[],
         },
       } as any,
       limbo: {
         [player1]: {
+          cards: [] as CardId[],
           config: {
             id: "limbo-p1",
             name: "Limbo",
@@ -157,9 +158,9 @@ function createGameState(
             owner: player1 as PlayerId,
             maxSize: 0,
           },
-          cards: [] as CardId[],
         },
         [player2]: {
+          cards: [] as CardId[],
           config: {
             id: "limbo-p2",
             name: "Limbo",
@@ -168,11 +169,11 @@ function createGameState(
             owner: player2 as PlayerId,
             maxSize: 0,
           },
-          cards: [] as CardId[],
         },
       } as any,
       removal: {
         [player1]: {
+          cards: [] as CardId[],
           config: {
             id: "removal-p1",
             name: "Removal",
@@ -181,9 +182,9 @@ function createGameState(
             owner: player1 as PlayerId,
             maxSize: 0,
           },
-          cards: [] as CardId[],
         },
         [player2]: {
+          cards: [] as CardId[],
           config: {
             id: "removal-p2",
             name: "Removal",
@@ -192,11 +193,11 @@ function createGameState(
             owner: player2 as PlayerId,
             maxSize: 0,
           },
-          cards: [] as CardId[],
         },
       } as any,
       resourceArea: {
         [player1]: {
+          cards: [] as CardId[],
           config: {
             id: "res-area-p1",
             name: "Resource Area",
@@ -205,9 +206,9 @@ function createGameState(
             owner: player1,
             maxSize: 15,
           },
-          cards: [] as CardId[],
         },
         [player2]: {
+          cards: [] as CardId[],
           config: {
             id: "res-area-p2",
             name: "Resource Area",
@@ -216,11 +217,11 @@ function createGameState(
             owner: player2,
             maxSize: 15,
           },
-          cards: [] as CardId[],
         },
       } as any,
       resourceDeck: {
         [player1]: {
+          cards: [] as CardId[],
           config: {
             id: "res-deck-p1",
             name: "Resource Deck",
@@ -230,9 +231,9 @@ function createGameState(
             faceDown: true,
             maxSize: 10,
           },
-          cards: [] as CardId[],
         },
         [player2]: {
+          cards: [] as CardId[],
           config: {
             id: "res-deck-p2",
             name: "Resource Deck",
@@ -242,11 +243,11 @@ function createGameState(
             faceDown: true,
             maxSize: 10,
           },
-          cards: [] as CardId[],
         },
       } as any,
       shieldSection: {
         [player1]: {
+          cards: [] as CardId[],
           config: {
             id: "shield-p1",
             name: "Shield Section",
@@ -256,9 +257,9 @@ function createGameState(
             faceDown: true,
             maxSize: 6,
           },
-          cards: [] as CardId[],
         },
         [player2]: {
+          cards: [] as CardId[],
           config: {
             id: "shield-p2",
             name: "Shield Section",
@@ -268,11 +269,11 @@ function createGameState(
             faceDown: true,
             maxSize: 6,
           },
-          cards: [] as CardId[],
         },
       } as any,
       trash: {
         [player1]: {
+          cards: [] as CardId[],
           config: {
             id: "trash-p1",
             name: "Trash",
@@ -281,9 +282,9 @@ function createGameState(
             owner: player1,
             maxSize: 0,
           },
-          cards: [] as CardId[],
         },
         [player2]: {
+          cards: [] as CardId[],
           config: {
             id: "trash-p2",
             name: "Trash",
@@ -292,7 +293,6 @@ function createGameState(
             owner: player2,
             maxSize: 0,
           },
-          cards: [] as CardId[],
         },
       } as any,
     },

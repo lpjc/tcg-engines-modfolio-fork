@@ -20,7 +20,6 @@ export const InterceptOrders: CommandCardDefinition = {
     {
       actions: [
         {
-          type: "REST",
           target: {
             count: 1,
             validTargets: [
@@ -33,19 +32,19 @@ export const InterceptOrders: CommandCardDefinition = {
             chooser: "controller",
             timing: "on_resolution",
           },
+          type: "REST",
         },
       ],
       category: "triggered",
       id: "gd01-099-burst-1",
       text: "【Burst】Choose 1 enemy Unit with 5 or less HP. Rest it.",
-      timing: { type: "BURST", timing: "after" },
+      timing: { timing: "after", type: "BURST" },
       // Note: HP filter (5 or less) is not directly mappable to TargetStateFilter
       // This filter would need custom handling in the effect execution layer
     },
     {
       actions: [
         {
-          type: "REST",
           target: {
             count: { min: 1, max: 2 },
             validTargets: [
@@ -58,6 +57,7 @@ export const InterceptOrders: CommandCardDefinition = {
             chooser: "controller",
             timing: "on_resolution",
           },
+          type: "REST",
         },
       ],
       category: "command",

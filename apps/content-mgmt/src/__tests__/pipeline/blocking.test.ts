@@ -31,7 +31,7 @@ const createMockAdapter = (options: {
     textContent: "Test transcript content",
   }),
   getConfig: () => ({
-    extractionTimeoutMs: 60000,
+    extractionTimeoutMs: 60_000,
     maxDurationSeconds: 1800,
     supportedLanguages: ["en"],
     validationRules: [],

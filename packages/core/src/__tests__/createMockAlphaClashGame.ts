@@ -348,9 +348,7 @@ const alphaClashFlow: FlowDefinition<TestGameState> = {
     },
     phases: {
       endOfTurn: {
-        endIf: (_context) => {
-          return true;
-        },
+        endIf: (_context) => true,
         next: "startOfTurn",
         onBegin: (_context) => {
           // End of turn effects
@@ -361,19 +359,19 @@ const alphaClashFlow: FlowDefinition<TestGameState> = {
         next: "primary",
         order: 1,
         steps: {
-          readyStep: {
-            order: 1,
-            next: "drawStep",
-            onBegin: (_context) => {
-              // Ready all engaged cards
-            },
-            endIf: () => true,
-          },
           drawStep: {
             order: 2,
             next: "resourceStep",
             onBegin: (_context) => {
               // Draw a card (handled by drawCard move)
+            },
+            endIf: () => true,
+          },
+          readyStep: {
+            order: 1,
+            next: "drawStep",
+            onBegin: (_context) => {
+              // Ready all engaged cards
             },
             endIf: () => true,
           },

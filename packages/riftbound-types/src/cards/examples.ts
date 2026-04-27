@@ -47,7 +47,7 @@ export const AGGRESSIVE_WARRIOR_EXAMPLE: UnitCard = {
       value: 2,
     },
     {
-      effect: { type: "discard", amount: 2, player: "self" },
+      effect: { amount: 2, player: "self", type: "discard" },
       trigger: { event: "play-self" },
       type: "triggered",
     },
@@ -75,7 +75,7 @@ export const STALWART_DEFENDER_EXAMPLE: UnitCard = {
       type: "keyword",
     },
     {
-      effect: { type: "draw", amount: 1 },
+      effect: { amount: 1, type: "draw" },
       trigger: { event: "play-self" },
       type: "triggered",
     },
@@ -103,9 +103,9 @@ export const MOBILE_SCOUT_EXAMPLE: UnitCard = {
     },
     {
       effect: {
-        type: "create-token",
-        token: { name: "Recruit", type: "unit", might: 1 },
         location: "here",
+        token: { name: "Recruit", type: "unit", might: 1 },
+        type: "create-token",
       },
       trigger: { event: "move-to-battlefield", on: "self" },
       type: "triggered",
@@ -128,7 +128,7 @@ export const MOBILE_SCOUT_EXAMPLE: UnitCard = {
 export const DYING_SAGE_EXAMPLE: UnitCard = {
   abilities: [
     {
-      effect: { type: "draw", amount: 1 },
+      effect: { amount: 1, type: "draw" },
       keyword: "Deathknell",
       type: "keyword",
     },
@@ -152,9 +152,9 @@ export const MIGHTY_CHAMPION_EXAMPLE: UnitCard = {
     {
       condition: { type: "while-mighty" },
       effect: {
-        type: "grant-keywords",
         keywords: ["Deflect", "Ganking", "Shield"],
         target: "self",
+        type: "grant-keywords",
       },
       type: "static",
     },
@@ -177,7 +177,7 @@ export const LEGION_SOLDIER_EXAMPLE: UnitCard = {
   abilities: [
     {
       condition: { type: "legion" },
-      effect: { type: "buff", target: "self" },
+      effect: { target: "self", type: "buff" },
       keyword: "Legion",
       type: "keyword",
     },
@@ -200,7 +200,6 @@ export const INSPIRING_LEADER_EXAMPLE: UnitCard = {
   abilities: [
     {
       effect: {
-        type: "modify-might",
         amount: 1,
         target: {
           type: "unit",
@@ -208,6 +207,7 @@ export const INSPIRING_LEADER_EXAMPLE: UnitCard = {
           location: "here",
           excludeSelf: true,
         },
+        type: "modify-might",
       },
       type: "static",
     },
@@ -230,7 +230,6 @@ export const SWEEPING_STRIKER_EXAMPLE: UnitCard = {
   abilities: [
     {
       effect: {
-        type: "damage",
         amount: 3,
         target: {
           type: "unit",
@@ -238,6 +237,7 @@ export const SWEEPING_STRIKER_EXAMPLE: UnitCard = {
           location: "here",
           quantity: "all",
         },
+        type: "damage",
       },
       trigger: { event: "attack", on: "self" },
       type: "triggered",
@@ -266,9 +266,9 @@ export const LIGHTNING_STRIKE_EXAMPLE: SpellCard = {
   abilities: [
     {
       effect: {
-        type: "damage",
         amount: 3,
         target: { type: "unit", location: "battlefield" },
+        type: "damage",
       },
       timing: "action",
       type: "spell",
@@ -294,10 +294,10 @@ export const BATTLE_SURGE_EXAMPLE: SpellCard = {
   abilities: [
     {
       effect: {
-        type: "modify-might",
         amount: 2,
-        target: { type: "unit" },
         duration: "turn",
+        target: { type: "unit" },
+        type: "modify-might",
       },
       repeat: { energy: 2 },
       timing: "reaction",
@@ -328,8 +328,8 @@ export const HIDDEN_ASSASSINATION_EXAMPLE: SpellCard = {
     },
     {
       effect: {
-        type: "kill",
         target: { type: "unit", location: "battlefield" },
+        type: "kill",
       },
       timing: "action",
       type: "spell",
@@ -355,8 +355,8 @@ export const COUNTERSPELL_EXAMPLE: SpellCard = {
   abilities: [
     {
       effect: {
-        type: "counter",
         target: "spell",
+        type: "counter",
       },
       timing: "reaction",
       type: "spell",
@@ -440,7 +440,7 @@ export const GOLD_TOKEN_EXAMPLE: GearCard = {
   abilities: [
     {
       cost: { exhaust: true },
-      effect: { type: "add-resource", energy: 1 },
+      effect: { energy: 1, type: "add-resource" },
       timing: "reaction",
       type: "activated",
     },
@@ -464,7 +464,7 @@ export const GOLD_TOKEN_EXAMPLE: GearCard = {
 export const ANCIENT_LIBRARY_EXAMPLE: BattlefieldCard = {
   abilities: [
     {
-      effect: { type: "draw", amount: 1 },
+      effect: { amount: 1, type: "draw" },
       trigger: { event: "conquer", on: "controller" },
       type: "triggered",
     },
@@ -483,7 +483,7 @@ export const ANCIENT_LIBRARY_EXAMPLE: BattlefieldCard = {
 export const MYSTIC_NEXUS_EXAMPLE: BattlefieldCard = {
   abilities: [
     {
-      effect: { type: "channel", amount: 1, exhausted: true },
+      effect: { amount: 1, exhausted: true, type: "channel" },
       optional: true,
       trigger: { event: "hold", on: "controller" },
       type: "triggered",
@@ -504,9 +504,9 @@ export const CROSSROADS_EXAMPLE: BattlefieldCard = {
   abilities: [
     {
       effect: {
-        type: "grant-keyword",
         keyword: "Ganking",
         target: { type: "unit", location: "here", quantity: "all" },
+        type: "grant-keyword",
       },
       type: "static",
     },
@@ -541,9 +541,9 @@ export const MASTER_ARMORER_EXAMPLE: UnitCard = {
     },
     {
       effect: {
-        type: "modify-might",
         amount: { count: { type: "gear", controller: "friendly" } },
         target: "self",
+        type: "modify-might",
       },
       type: "static",
     },
@@ -571,7 +571,6 @@ export const VERSATILE_WARRIOR_EXAMPLE: UnitCard = {
     {
       cost: { spend: "buff" },
       effect: {
-        type: "choice",
         notChosenThisTurn: true,
         options: [
           {
@@ -603,6 +602,7 @@ export const VERSATILE_WARRIOR_EXAMPLE: UnitCard = {
             },
           },
         ],
+        type: "choice",
       },
       type: "activated",
     },
@@ -626,9 +626,9 @@ export const MIGHTY_REINFORCEMENT_EXAMPLE: UnitCard = {
   abilities: [
     {
       condition: {
-        type: "count",
-        target: { type: "unit", controller: "friendly", filter: "mighty" },
         comparison: { gte: 1 },
+        target: { type: "unit", controller: "friendly", filter: "mighty" },
+        type: "count",
       },
       effect: {
         type: "modify-might", // This should be a cost modifier, but using modify-might as placeholder

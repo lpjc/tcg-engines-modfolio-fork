@@ -8,9 +8,7 @@ export const tryEverything: ActionCard = {
           {
             steps: [
               {
-                type: "remove-damage",
                 amount: 3,
-                upTo: true,
                 target: {
                   selector: "chosen",
                   count: 1,
@@ -18,10 +16,12 @@ export const tryEverything: ActionCard = {
                   zones: ["play"],
                   cardTypes: ["character"],
                 },
+                type: "remove-damage",
+                upTo: true,
               },
               {
-                type: "ready",
                 target: "CHOSEN_CHARACTER",
+                type: "ready",
               },
             ],
             type: "sequence",

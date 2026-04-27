@@ -29,7 +29,6 @@ export const sherwoodForestOutlawHideaway: LocationCard = {
               ink: 1,
             },
             effect: {
-              type: "deal-damage",
               amount: 2,
               target: {
                 selector: "chosen",
@@ -39,6 +38,7 @@ export const sherwoodForestOutlawHideaway: LocationCard = {
                   },
                 ],
               },
+              type: "deal-damage",
             },
             type: "activated",
           },

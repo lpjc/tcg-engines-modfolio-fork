@@ -4,6 +4,17 @@
 
   const { Story } = defineMeta({
     argTypes: {
+      cardSpacing: {
+        control: { type: "select" },
+        options: ["none", "tight", "normal", "loose", "overlap"],
+      },
+      dropHighlight: { control: "boolean" },
+      droppable: { control: "boolean" },
+      maxCards: { control: "number" },
+      orientation: {
+        control: { type: "select" },
+        options: ["horizontal", "vertical"],
+      },
       type: {
         control: { type: "select" },
         options: [
@@ -16,17 +27,6 @@
           "custom",
         ],
       },
-      orientation: {
-        control: { type: "select" },
-        options: ["horizontal", "vertical"],
-      },
-      cardSpacing: {
-        control: { type: "select" },
-        options: ["none", "tight", "normal", "loose", "overlap"],
-      },
-      maxCards: { control: "number" },
-      droppable: { control: "boolean" },
-      dropHighlight: { control: "boolean" },
     },
     component: Zone,
     parameters: {

@@ -310,18 +310,11 @@ export const createGameOperations = <TCardDef, TCardMeta>(
     }
   },
 
-  getChoosingFirstPlayer: () => {
-    return state.choosingFirstPlayer;
-  },
+  getChoosingFirstPlayer: () => state.choosingFirstPlayer,
 
-  getOTP: () => {
-    return state.otp;
-  },
+  getOTP: () => state.otp,
 
-  getPendingMulligan: () => {
-    // Return copy to prevent external mutation
-    return state.pendingMulligan ? [...state.pendingMulligan] : [];
-  },
+  getPendingMulligan: () => state.pendingMulligan ? [...state.pendingMulligan] : [],
 
   removePendingMulligan: (playerId: PlayerId) => {
     if (!state.pendingMulligan) {

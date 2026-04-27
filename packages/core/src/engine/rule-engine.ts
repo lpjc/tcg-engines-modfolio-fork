@@ -434,19 +434,19 @@ export class RuleEngine<
         },
         messages: {
           messages: {
-            casual: {
-              key: `moves.${moveId}.failure`,
-              values: {
-                playerId: contextInput.playerId,
-                error: failure.error,
-              },
-            },
             advanced: {
               key: `moves.${moveId}.failure.detailed`,
               values: {
                 playerId: contextInput.playerId,
                 error: failure.error,
                 errorCode: failure.errorCode,
+              },
+            },
+            casual: {
+              key: `moves.${moveId}.failure`,
+              values: {
+                playerId: contextInput.playerId,
+                error: failure.error,
               },
             },
           },
@@ -585,8 +585,8 @@ export class RuleEngine<
             casual: {
               key: `moves.${moveId}.success`,
               values: {
-                playerId: contextInput.playerId,
                 params: contextInput.params,
+                playerId: contextInput.playerId,
               },
             },
           },

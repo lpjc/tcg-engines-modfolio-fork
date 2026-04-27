@@ -5,6 +5,9 @@ import devtoolsJson from "vite-plugin-devtools-json";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
+  optimizeDeps: {
+    exclude: ["@tcg/core-ui", "@tcg/lorcana-cards"],
+  },
   plugins: [
     tailwindcss(),
     sveltekit(),
@@ -14,9 +17,6 @@ export default defineConfig({
       outdir: "./src/lib/paraglide",
     }) as any,
   ],
-  optimizeDeps: {
-    exclude: ["@tcg/core-ui", "@tcg/lorcana-cards"],
-  },
   test: {
     expect: { requireAssertions: true },
 

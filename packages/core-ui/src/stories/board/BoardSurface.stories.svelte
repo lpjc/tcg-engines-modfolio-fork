@@ -8,15 +8,15 @@
         control: { type: "select" },
         options: ["16/9", "3/2", "4/3", "9/16", "2/3", "1/1"],
       },
-      mobileAspectRatio: {
-        control: { type: "select" },
-        options: ["16/9", "3/2", "4/3", "9/16", "2/3", "1/1"],
-      },
       desktopAspectRatio: {
         control: { type: "select" },
         options: ["16/9", "3/2", "4/3", "9/16", "2/3", "1/1"],
       },
       maxWidth: { control: "text" },
+      mobileAspectRatio: {
+        control: { type: "select" },
+        options: ["16/9", "3/2", "4/3", "9/16", "2/3", "1/1"],
+      },
       width: { control: "text" },
     },
     component: BoardSurface,

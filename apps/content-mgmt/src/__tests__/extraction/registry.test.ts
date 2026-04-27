@@ -26,7 +26,7 @@ const createMockAdapter = (
     textContent: "test content",
   }),
   getConfig: () => ({
-    extractionTimeoutMs: 60000,
+    extractionTimeoutMs: 60_000,
     supportedLanguages: ["en"],
     validationRules: [],
   }),

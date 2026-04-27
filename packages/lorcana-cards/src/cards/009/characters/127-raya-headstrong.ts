@@ -8,7 +8,6 @@ export const rayaHeadstrong: CharacterCard = {
           {
             chooser: "CONTROLLER",
             effect: {
-              type: "ready",
               target: {
                 selector: "self",
                 count: 1,
@@ -16,6 +15,7 @@ export const rayaHeadstrong: CharacterCard = {
                 zones: ["play"],
                 cardTypes: ["character"],
               },
+              type: "ready",
             },
             type: "optional",
           },

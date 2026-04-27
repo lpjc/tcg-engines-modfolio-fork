@@ -5,8 +5,8 @@ import { mdsvex } from "mdsvex";
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   // Consult https://svelte.dev/docs/kit/integrations
-  // for more information about preprocessors
-  preprocess: [vitePreprocess(), mdsvex()],
+  // For more information about preprocessors
+  extensions: [".svelte", ".svx"],
 
   kit: {
     // Cloudflare Pages adapter
@@ -21,7 +21,7 @@ const config = {
     }),
   },
 
-  extensions: [".svelte", ".svx"],
+  preprocess: [vitePreprocess(), mdsvex()],
 };
 
 export default config;

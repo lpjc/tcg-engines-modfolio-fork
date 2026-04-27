@@ -114,9 +114,10 @@ export function createApp(options: AppOptions = {}) {
       .get(
         "/health",
         ({ user, session }) => ({
+          authenticated: !!session,
+          service: "auth-service",
           status: "ok",
           timestamp: new Date().toISOString(),
-          service: "auth-service",
           user: user
             ? {
                 id: user.id,
@@ -124,7 +125,6 @@ export function createApp(options: AppOptions = {}) {
                 name: user.name,
               }
             : null,
-          authenticated: !!session,
         }),
         { auth: true },
       )

@@ -11,10 +11,10 @@ const RATE_LIMIT_RESPONSE: Response = new Response(
     statusCode: 429,
   }),
   {
-    status: 429,
     headers: {
       "Content-Type": "application/json",
     },
+    status: 429,
   },
 );
 
@@ -41,7 +41,7 @@ function getClientIdentifier(request: Request, server: unknown): string {
 
   // Try Cloudflare header first
   const cfIp = request.headers.get("CF-Connecting-IP");
-  if (cfIp) return cfIp;
+  if (cfIp) {return cfIp;}
 
   // Try standard proxy headers
   const forwardedFor = request.headers.get("X-Forwarded-For");
@@ -54,7 +54,7 @@ function getClientIdentifier(request: Request, server: unknown): string {
 
   // Try X-Real-IP
   const realIp = request.headers.get("X-Real-IP");
-  if (realIp) return realIp;
+  if (realIp) {return realIp;}
 
   // Fallback to Elysia's built-in IP detection
   if (

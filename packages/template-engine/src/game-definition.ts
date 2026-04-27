@@ -160,15 +160,15 @@ export const templateGameDefinition: GameDefinition<TemplateGameState, TemplateG
     phase: "draw",
     players: players.map((p) => ({
       id: p.id as PlayerId,
-      name: p.name || "Player",
       life: 20,
+      name: p.name || "Player",
     })),
     turnNumber: 1,
     zones: {
       deck: Object.fromEntries(players.map((p) => [p.id, []])),
-      hand: Object.fromEntries(players.map((p) => [p.id, []])),
       field: Object.fromEntries(players.map((p) => [p.id, []])),
       graveyard: Object.fromEntries(players.map((p) => [p.id, []])),
+      hand: Object.fromEntries(players.map((p) => [p.id, []])),
     },
   }),
 };

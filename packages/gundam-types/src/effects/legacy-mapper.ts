@@ -263,10 +263,10 @@ function convertActionToEffectAction(action: LegacyAction): EffectAction[] {
         {
           from: "hand",
           target: {
-            count: 1,
-            validTargets: [],
             chooser: "controller",
+            count: 1,
             timing: "on_resolution",
+            validTargets: [],
           },
           to: "battleArea",
           type: "MOVE_CARD",
@@ -279,10 +279,10 @@ function convertActionToEffectAction(action: LegacyAction): EffectAction[] {
         {
           from: "battleArea",
           target: {
-            count: 1,
-            validTargets: [],
             chooser: "controller",
+            count: 1,
             timing: "on_resolution",
+            validTargets: [],
           },
           to: "hand",
           type: "MOVE_CARD",
@@ -336,15 +336,15 @@ function convertActionToEffectAction(action: LegacyAction): EffectAction[] {
           duration:
             action.duration === "PERMANENT"
               ? "permanent"
-              : action.duration === "END_OF_COMBAT"
+              : (action.duration === "END_OF_COMBAT"
                 ? "end_of_combat"
-                : "this_turn",
+                : "this_turn"),
           hpModifier: action.attribute === "HP" ? action.value : undefined,
           target: {
-            count: 1,
-            validTargets: [],
             chooser: "controller",
+            count: 1,
             timing: "on_resolution",
+            validTargets: [],
           },
           type: "MODIFY_STATS",
         },

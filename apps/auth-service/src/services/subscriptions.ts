@@ -2,10 +2,10 @@ import { and, desc, eq } from "drizzle-orm";
 import { getDb } from "../db/client";
 import {
   type DigestPreference,
-  digestHistory,
-  digestPreferences,
   type NewDigestPreference,
   type UserSubscription,
+  digestHistory,
+  digestPreferences,
   userSubscriptions,
 } from "../db/schema";
 
@@ -35,9 +35,9 @@ export async function addSubscription(
   const result = await db
     .insert(userSubscriptions)
     .values({
-      userId,
       creatorId,
       gameId: gameId ?? null,
+      userId,
     })
     .returning();
 
@@ -140,10 +140,10 @@ export async function updateDigestPreferences(
   const result = await db
     .insert(digestPreferences)
     .values({
-      userId,
-      frequency: data.frequency ?? "daily",
       deliveryTime: data.deliveryTime ?? "09:00:00",
+      frequency: data.frequency ?? "daily",
       isActive: data.isActive ?? false,
+      userId,
     })
     .returning();
 
