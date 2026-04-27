@@ -1,8 +1,0 @@
-# Output directory
-output/
-
-# Generated pattern files
-patterns.json
-patterns.generated.ts
-pattern-analysis-report.md
-

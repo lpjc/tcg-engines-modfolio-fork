@@ -2,8 +2,6 @@
   import { onMount } from "svelte";
 
   // Import Apps
-  import BrowserApp from "../apps/BrowserApp.svelte";
-  import HelloApp from "../apps/HelloApp.svelte";
   import SubredditWarsApp from "../apps/SubredditWarsApp.svelte";
   import { os } from "../os.svelte";
   import CommandCenter from "./CommandCenter.svelte";
@@ -15,22 +13,6 @@
   onMount(() => {
     // Register default apps if empty
     if (os.desktopIcons.length === 0) {
-      os.registerApp({
-        id: "hello",
-        title: "Hello World",
-        icon: "👋",
-        component: HelloApp,
-        defaultWidth: 400,
-        defaultHeight: 300,
-      });
-      os.registerApp({
-        id: "browser",
-        title: "Web Browser",
-        icon: "🌐",
-        component: BrowserApp,
-        defaultWidth: 800,
-        defaultHeight: 600,
-      });
       os.registerApp({
         id: "subreddit-wars",
         title: "Subreddit Wars",

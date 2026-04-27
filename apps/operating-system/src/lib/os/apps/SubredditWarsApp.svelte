@@ -27,10 +27,19 @@
   let selectedBacklineSlot = $state<number>(0);
   let selectedSpellTarget = $state<TrackName | null>(null);
   let logExpanded = $state(true);
+  let commitError = $state<string | null>(null);
 
   // ─── Derived helpers ───────────────────────────────────────────────────────
   let playerHandMods = $derived(getHandMods(game, "player"));
   let playerHandSpells = $derived(getHandSpells(game, "player"));
+
+  // Auto-select first mod whenever the player enters a new COMMIT phase
+  $effect(() => {
+    if (game.phase === "COMMIT" && selectedModId === null && playerHandMods.length > 0) {
+      selectedModId = playerHandMods[0]!;
+      selectedBacklineSlot = defaultBacklineSlot(game, "player");
+    }
+  });
 
   let needsSpellTarget = $derived(
     !!selectedSpellId &&
@@ -120,22 +129,26 @@
 
   function handleCommit() {
     if (!canCommit || !selectedModId) return;
+    commitError = null;
 
-    const playerAction: CommittedAction = {
-      modId: selectedModId,
-      spellId: selectedSpellId,
-      backlineSlot: selectedBacklineSlot,
-      spellTarget: selectedSpellTarget ?? undefined,
-    };
+    try {
+      const playerAction: CommittedAction = {
+        modId: selectedModId,
+        spellId: selectedSpellId,
+        backlineSlot: selectedBacklineSlot,
+        spellTarget: selectedSpellTarget ?? undefined,
+      };
 
-    const botAction = botCommit(game);
+      const botAction = botCommit(game);
+      game = resolveTurn(game, playerAction, botAction);
 
-    game = resolveTurn(game, playerAction, botAction);
-
-    // Reset selections
-    selectedModId = null;
-    selectedSpellId = null;
-    selectedSpellTarget = null;
+      // Reset selections — auto-select will kick in on next COMMIT phase
+      selectedModId = null;
+      selectedSpellId = null;
+      selectedSpellTarget = null;
+    } catch (err) {
+      commitError = err instanceof Error ? err.message : String(err);
+    }
   }
 
   function handleNextTurn() {
@@ -152,6 +165,7 @@
     selectedSpellId = null;
     selectedSpellTarget = null;
     selectedBacklineSlot = 0;
+    commitError = null;
   }
 </script>
 
@@ -407,7 +421,7 @@
             {@const mod = cardOf(selectedModId) as ModCardDef}
             <span class="badge badge-primary">{mod?.name ?? "?"} → slot {selectedBacklineSlot + 1}</span>
           {:else}
-            <span class="text-base-content/40">← pick a mod</span>
+            <span class="text-warning text-xs font-semibold">⚠ No mods in hand — deck empty!</span>
           {/if}
           {#if selectedSpellId}
             {@const spell = cardOf(selectedSpellId) as SpellCardDef}
@@ -417,6 +431,12 @@
             >
           {/if}
         </div>
+        {#if needsSpellTarget && !selectedSpellTarget}
+          <div class="text-xs text-warning mt-1">☝ Pick a track target above to continue.</div>
+        {/if}
+        {#if commitError}
+          <div class="text-xs text-error mt-1 bg-error/10 rounded p-1">⚠ {commitError}</div>
+        {/if}
         {#if game.phase === "COMMIT"}
           <button
             class="btn btn-primary btn-sm mt-2 w-full"
